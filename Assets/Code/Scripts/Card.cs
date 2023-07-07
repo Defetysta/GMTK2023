@@ -1,4 +1,3 @@
-using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,6 +9,12 @@ public class Card : MonoBehaviour
 	private Button myButton;
 	private CardSlot holderCardSlot;
 	public Transform AvailableCardsContainer;
+
+	public CardStatsBase CardStats;
+	
+	public TextMeshProUGUI cardName;
+	public TextMeshProUGUI cardEffectText;
+	public TextMeshProUGUI cardDefenseText;
 
 	public CardSlot HolderCardSlot => holderCardSlot;
 
@@ -26,6 +31,8 @@ public class Card : MonoBehaviour
 		CardSlot.CardSlotClicked -= CardSlotClicked;
 	}
 
+	#region UI Logic
+	
 	private void CardSlotClicked(CardSlot targetSlot)
 	{
 		if (CurrentlySelected != this)
@@ -107,4 +114,18 @@ public class Card : MonoBehaviour
 		holderCardSlot.attachedCard = null;
 		holderCardSlot = null;
 	}
+
+	#endregion
+
+	#region In game logic
+
+	public void SetCardStats(CardStatsBase stats)
+	{
+		CardStats = stats;
+		cardName.text = CardStats.CardName;
+		cardEffectText.text = CardStats.EffectValue.ToString();
+		cardEffectText.color = CardStats.EffectColor;
+	}
+
+	#endregion
 }
