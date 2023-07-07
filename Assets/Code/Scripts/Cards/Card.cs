@@ -127,5 +127,9 @@ public class Card : MonoBehaviour
 		cardEffectText.color = CardStats.EffectColor;
 	}
 
+	public void ApplyEffect()
+	{
+		
+	}
 	#endregion
 }

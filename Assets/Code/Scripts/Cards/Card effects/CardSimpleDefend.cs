@@ -8,4 +8,9 @@ public class CardSimpleDefend : CardStatsBase
 	private int defenseValue;
 
 	public override int EffectValue => defenseValue;
+
+	public override void ApplyEffect(FighterStats target)
+	{
+		target.Armor.Value += target.Posture.Value + EffectValue;
+	}
 }
