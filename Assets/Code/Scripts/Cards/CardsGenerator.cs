@@ -1,20 +1,37 @@
-using System;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class CardsGenerator : MonoBehaviour
+public class CardsGenerator
 {
-	[SerializeField]
-	private CardBase[] defaultDeck;
+	private CardBase[] DefaultDeck { get; }
+	private Card CardTemplate { get; }
+	
+	private Transform AvailableCardsContainer { get; }
 
-	[SerializeField]
-	private Card cardTemplate;
-
-	private void Awake()
+	public CardsGenerator(Card cardTemplate, CardBase[] defaultDeck, Transform newCardsParent)
 	{
-		for (int i = 0; i < defaultDeck.Length; i++)
+		DefaultDeck = defaultDeck;
+		CardTemplate = cardTemplate;
+		AvailableCardsContainer = newCardsParent;
+	}
+	
+	public List<Card> InitializeDeck()
+	{
+		var cards = new List<Card>();
+		for (int i = 0; i < DefaultDeck.Length; i++)
 		{
-			var newCard = Instantiate(cardTemplate, transform);
-			newCard.SetCardStats(defaultDeck[i].GetStats());
+			Card newCard = GenerateCard(DefaultDeck[i]);
+			cards.Add(newCard);
 		}
+
+		return cards;
+	}
+
+	public Card GenerateCard(CardBase cardBase)
+	{
+		Card newCard = Object.Instantiate(CardTemplate);
+		newCard.SetCardStats(cardBase.GetStats());
+
+		return newCard;
 	}
 }

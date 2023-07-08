@@ -1,14 +1,13 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-	public static GameManager Me;
-
 	[SerializeField]
 	private float timePerMove;
+	[SerializeField]
+	private float timeBeforeFirstMove;
 
 	[SerializeField]
 	private StatsDisplayer enemyStats;
@@ -16,64 +15,72 @@ public class GameManager : MonoBehaviour
 	private StatsDisplayer playerStats;
 
 	[SerializeField]
-	private CardSlot[] cardSlots;
+	private PlayerHand playerHand;
 
 	[SerializeField]
 	private FighterStats enemyCombatController;
 	[SerializeField]
 	private FighterStats playerCombatController;
+
+	[SerializeField]
+	private DiscardPile discardPile;
+
+	[SerializeField]
+	private Deck playerDeck;
+
+	public Button startTurnButton;
+	public Button endTurnButton;
 	
 	private void Awake()
 	{
-		if (Me == null)
-		{
-			Me = this;
-		}
-
 		enemyStats.Display(enemyCombatController);
 		playerStats.Display(playerCombatController);
-		// enemyCombatController = new FighterStats(enemyHP);
-		// playerCombatController = new FighterStats(myHP);
+		
+		playerHand.Initialize(discardPile);
+		playerDeck.Initialize(discardPile);
+		
+		startTurnButton.onClick.AddListener(StartTurn);
+		endTurnButton.onClick.AddListener(EndTurn);
 	}
-
-	[ContextMenu("xd")]
-	public void xd()
+	private void StartTurn()
 	{
 		StartCoroutine(PlayerTurn());
 	}
 
 	private IEnumerator PlayerTurn()
 	{
-		Debug.Log("start coroutine");
 		int i = 0;
+		
+		playerHand.AddCards(playerDeck.DrawCards());
+
+		yield return new WaitForSeconds(timeBeforeFirstMove);
+		
 		do
 		{
-			Debug.Log("coroutine " + i);
 			yield return new WaitForSeconds(timePerMove);
-			ApplyCard(cardSlots[i].AttachedCard);
+			ApplyCard(playerHand.CardSlots[i].AttachedCard);
 			i++;
 			
-		} while (i < cardSlots.Length);
+		} while (i < playerHand.CardSlots.Length);
+		
+		playerHand.EndTurn();
 	}
 
 	private void ApplyCard(Card usedCard)
 	{
 		var target = usedCard.CardStats.TargetEnemy ? enemyCombatController : playerCombatController;
 		usedCard.CardStats.ApplyEffect(target);
+		usedCard.Detach();
 		
 		enemyStats.Display(enemyCombatController);
 		playerStats.Display(playerCombatController);
+		discardPile.AddDiscardedCard(usedCard);
+		playerHand.RemoveCard(usedCard);
 	}
 
-	public void ApplyCards(IReadOnlyList<Card> usedCards)
+	private void EndTurn()
 	{
-		for (int i = 0; i < usedCards.Count; i++)
-		{
-			var target = usedCards[i].CardStats.TargetEnemy ? enemyCombatController : playerCombatController;
-			usedCards[i].CardStats.ApplyEffect(target);
-		}
-		
-		enemyStats.Display(enemyCombatController);
-		playerStats.Display(playerCombatController);
+		playerHand.EndTurn();
+		StopAllCoroutines();
 	}
 }
