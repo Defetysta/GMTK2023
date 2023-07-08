@@ -20,6 +20,13 @@ public class Card : MonoBehaviour
 
 	public CardSlot HolderCardSlot => holderCardSlot;
 
+	private Deck deck;
+	
+	public void Init(Deck deck)
+	{
+		this.deck = deck;
+	}
+	
 	private void Awake()
 	{
 		myButton = GetComponent<Button>();
@@ -83,6 +90,8 @@ public class Card : MonoBehaviour
 		}
 
 		newCard.WasSwappedIn = true;
+		deck.RemoveCardFromPool(newCard);
+		deck.AddCardToPool(this);
 	}
 
 	public void Attach(CardSlot cardSlot)

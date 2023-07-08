@@ -32,7 +32,7 @@ public class Deck : MonoBehaviour
 	{
 		Shuffle(defaultDeck);
 		
-		cardsGenerator = new CardsGenerator(cardTemplate, defaultDeck, availableCardsContainer);
+		cardsGenerator = new CardsGenerator(this, cardTemplate, defaultDeck, availableCardsContainer);
 
 		var newCards = cardsGenerator.InitializeDeck();
 		availableCards.AddRange(newCards);
@@ -52,14 +52,34 @@ public class Deck : MonoBehaviour
 				RetrieveDiscardedCards();
 			}
 
-			Card card = availableCards.FirstOrDefault();
+			Card card = availableCards[0];
 			toDraw.Add(card);
 			availableCards.Remove(card);
 		}
 		
 		numberOfAvailableCards.text = availableCards.Count.ToString();
-		
+
+		foreach (Card x in toDraw)
+		{
+			if (x.gameObject.activeInHierarchy == false)
+			{
+				Debug.Log("hjjeher");
+
+				break;
+			}
+		}
+
 		return toDraw;
+	}
+
+	public void AddCardToPool(Card card)
+	{
+		availableCards.Add(card);
+	}
+
+	public void RemoveCardFromPool(Card card)
+	{
+		availableCards.Remove(card);
 	}
 
 	private void RetrieveDiscardedCards()
