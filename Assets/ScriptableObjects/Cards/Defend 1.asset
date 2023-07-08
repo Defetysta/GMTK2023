@@ -9,11 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9ffedafc3dfd2e4d869b9574d988977, type: 3}
-  m_Name: SimpleAttack 1
+  m_Script: {fileID: 11500000, guid: 8630f3a480310d84d9026be828fa18c3, type: 3}
+  m_Name: Defend 1
   m_EditorClassIdentifier: 
   stats:
-    cardName: Att
-    effectColor: {r: 0.17254902, g: 0.85882354, b: 0.6283926, a: 1}
-    targetEnemy: 1
-    attackValue: 1
+    cardName: Def
+    effectColor: {r: 0.16464934, g: 0.3342791, b: 0.9433962, a: 1}
+    targetEnemy: 0
+    defenseValue: 1

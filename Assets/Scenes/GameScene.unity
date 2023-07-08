@@ -499,9 +499,49 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2371391515958776956, guid: 036f202e0107d7c46919762895877e0d, type: 3}
+      propertyPath: defaultDeck.Array.size
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2371391515958776956, guid: 036f202e0107d7c46919762895877e0d, type: 3}
       propertyPath: availableCardsContainer
       value: 
       objectReference: {fileID: 1650464257}
+    - target: {fileID: 2371391515958776956, guid: 036f202e0107d7c46919762895877e0d, type: 3}
+      propertyPath: defaultDeck.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 31a5d8ed66dd6f54595bf0de49617807, type: 2}
+    - target: {fileID: 2371391515958776956, guid: 036f202e0107d7c46919762895877e0d, type: 3}
+      propertyPath: defaultDeck.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 7cf71f1f04571aa489dee02253270330, type: 2}
+    - target: {fileID: 2371391515958776956, guid: 036f202e0107d7c46919762895877e0d, type: 3}
+      propertyPath: defaultDeck.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 64f6691b86d8df94c91113ebe3af6bd1, type: 2}
+    - target: {fileID: 2371391515958776956, guid: 036f202e0107d7c46919762895877e0d, type: 3}
+      propertyPath: defaultDeck.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: 098137a9909c11246b7edd3e13fed288, type: 2}
+    - target: {fileID: 2371391515958776956, guid: 036f202e0107d7c46919762895877e0d, type: 3}
+      propertyPath: defaultDeck.Array.data[4]
+      value: 
+      objectReference: {fileID: 11400000, guid: 8ffd30d48b9067f4fbd503902931ff1f, type: 2}
+    - target: {fileID: 2371391515958776956, guid: 036f202e0107d7c46919762895877e0d, type: 3}
+      propertyPath: defaultDeck.Array.data[5]
+      value: 
+      objectReference: {fileID: 11400000, guid: 5e3937996c4f89743aabe48881be5c5d, type: 2}
+    - target: {fileID: 2371391515958776956, guid: 036f202e0107d7c46919762895877e0d, type: 3}
+      propertyPath: defaultDeck.Array.data[6]
+      value: 
+      objectReference: {fileID: 11400000, guid: 6c380b18e45408b4ea6809fa70f63c5d, type: 2}
+    - target: {fileID: 2371391515958776956, guid: 036f202e0107d7c46919762895877e0d, type: 3}
+      propertyPath: defaultDeck.Array.data[7]
+      value: 
+      objectReference: {fileID: 11400000, guid: 81ba367cdcf2a2e4c9d6d4ad46b43b2d, type: 2}
+    - target: {fileID: 2371391515958776956, guid: 036f202e0107d7c46919762895877e0d, type: 3}
+      propertyPath: defaultDeck.Array.data[8]
+      value: 
+      objectReference: {fileID: 11400000, guid: af36d504890dc08458faa0c5c69d7143, type: 2}
     - target: {fileID: 2371391516254900369, guid: 036f202e0107d7c46919762895877e0d, type: 3}
       propertyPath: m_Name
       value: Canvas
