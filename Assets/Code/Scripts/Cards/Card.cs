@@ -91,14 +91,14 @@ public class Card : MonoBehaviour
 
 	public void Attach(CardSlot cardSlot)
 	{
-		cardSlot.attachedCard = this;
+		cardSlot.AttachedCard = this;
 		holderCardSlot = cardSlot;
 		MoveToTarget(cardSlot.transform);
 	}
 
 	public void Detach()
 	{
-		holderCardSlot.attachedCard = null;
+		holderCardSlot.AttachedCard = null;
 		holderCardSlot = null;
 	}
 	
@@ -111,7 +111,7 @@ public class Card : MonoBehaviour
 			return;
 		}
 		
-		holderCardSlot.attachedCard = null;
+		holderCardSlot.AttachedCard = null;
 		holderCardSlot = null;
 	}
 
@@ -126,6 +126,6 @@ public class Card : MonoBehaviour
 		cardEffectText.text = CardStats.EffectValue.ToString();
 		cardEffectText.color = CardStats.EffectColor;
 	}
-
+	
 	#endregion
 }
