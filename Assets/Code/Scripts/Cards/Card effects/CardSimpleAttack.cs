@@ -15,7 +15,8 @@ public class CardSimpleAttack : CardStatsBase
 		if (target.Armor.Value > 0)
 		{
 			finalDamage -= target.Armor.Value;
-			target.Armor.Value = Mathf.Clamp(target.Armor.Value, 0, target.Armor.Value - EffectValue);
+			float armorAfterDamage = target.Armor.Value - EffectValue;
+			target.Armor.Value = armorAfterDamage > 0 ? armorAfterDamage : 0;
 		}
 
 		if (finalDamage > 0)
