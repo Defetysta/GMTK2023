@@ -9,11 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9ffedafc3dfd2e4d869b9574d988977, type: 3}
-  m_Name: SimpleAttack
+  m_Script: {fileID: 11500000, guid: 5b779818372409044a656ca621818923, type: 3}
+  m_Name: Medium
   m_EditorClassIdentifier: 
-  stats:
-    cardName: Att
-    effectColor: {r: 0.8584906, g: 0.17412782, b: 0.17412782, a: 1}
-    targetEnemy: 1
-    attackValue: 3
+  moveset: {fileID: 0}
+  stats: {fileID: 0}
