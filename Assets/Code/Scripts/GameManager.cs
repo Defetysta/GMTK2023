@@ -29,7 +29,6 @@ public class GameManager : MonoBehaviour
 	private Deck playerDeck;
 
 	public Button startTurnButton;
-	public Button endTurnButton;
 
 	private int enemyMoveCounter = 0;
 	private void Awake()
@@ -37,11 +36,9 @@ public class GameManager : MonoBehaviour
 		enemyStats.Display(enemyCombatController.Stats);
 		playerStats.Display(playerCombatController);
 		
-		playerHand.Initialize(discardPile);
 		playerDeck.Initialize(discardPile);
 		
 		startTurnButton.onClick.AddListener(StartTurn);
-		endTurnButton.onClick.AddListener(EndTurn);
 	}
 	private void StartTurn()
 	{
@@ -51,7 +48,7 @@ public class GameManager : MonoBehaviour
 	private IEnumerator PlayerTurn()
 	{
 		int i = 0;
-		
+
 		playerHand.AddCards(playerDeck.DrawCards());
 
 		yield return new WaitForSeconds(timeBeforeFirstMove);
@@ -63,8 +60,6 @@ public class GameManager : MonoBehaviour
 			i++;
 			
 		} while (i < playerHand.CardSlots.Length);
-		
-		playerHand.EndTurn();
 
 		HandleEnemyMoves();
 		enemyStats.Display(enemyCombatController.Stats);
@@ -99,12 +94,5 @@ public class GameManager : MonoBehaviour
 		enemyStats.Display(enemyCombatController.Stats);
 		playerStats.Display(playerCombatController);
 		discardPile.AddDiscardedCard(usedCard);
-		playerHand.RemoveCard(usedCard);
-	}
-
-	private void EndTurn()
-	{
-		playerHand.EndTurn();
-		StopAllCoroutines();
 	}
 }

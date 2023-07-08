@@ -30,12 +30,16 @@ public class Deck : MonoBehaviour
 	
 	private void Awake()
 	{
+		Shuffle(defaultDeck);
 		GetComponent<Button>().onClick.AddListener(Clicked);
 		
 		cardsGenerator = new CardsGenerator(cardTemplate, defaultDeck, availableCardsContainer);
 
 		var newCards = cardsGenerator.InitializeDeck();
 		availableCards.AddRange(newCards);
+		
+		RetrieveDiscardedCards();
+		
 		numberOfAvailableCards.text = availableCards.Count.ToString();
 	}
 
@@ -46,12 +50,10 @@ public class Deck : MonoBehaviour
 		{
 			if (availableCards.Count == 0)
 			{
-				availableCards = discardPile.RetrieveDiscardedCards().ToList();
+				RetrieveDiscardedCards();
 			}
 
 			Card card = availableCards.FirstOrDefault();
-			card.transform.SetParent(availableCardsContainer);
-			card.gameObject.SetActive(true);
 			toDraw.Add(card);
 			availableCards.Remove(card);
 		}
@@ -59,6 +61,24 @@ public class Deck : MonoBehaviour
 		numberOfAvailableCards.text = availableCards.Count.ToString();
 		
 		return toDraw;
+	}
+
+	private void RetrieveDiscardedCards()
+	{
+		availableCards.AddRange(discardPile.RetrieveDiscardedCards().ToList());
+
+		for (int i = 0; i < availableCards.Count; i++)
+		{
+			AddCardToDeck(availableCards[i]);
+		}
+
+		Shuffle(availableCards);
+	}
+
+	private void AddCardToDeck(Card card)
+	{
+		card.transform.SetParent(availableCardsContainer);
+		card.gameObject.SetActive(true);
 	}
 
 	public void Clicked()
@@ -81,5 +101,18 @@ public class Deck : MonoBehaviour
 		Card.CurrentlySelected.transform.SetParent(availableCardsContainer);
 		Card.CurrentlySelected.Detach();
 		Card.CurrentlySelected = null;
+	}
+	
+	private void Shuffle<T>(IList<T> list)  
+	{  
+		var rng = new System.Random();
+		int n = list.Count;  
+		while (n > 1) {  
+			n--;  
+			int k = rng.Next(n + 1);  
+			T value = list[k];  
+			list[k] = list[n];  
+			list[n] = value;  
+		}  
 	}
 }
