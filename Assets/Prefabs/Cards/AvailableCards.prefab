@@ -53,7 +53,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c538da82ad7009c41bff26d101e0951c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultDeck: []
+  defaultDeck:
+  - {fileID: 11400000, guid: 64f6691b86d8df94c91113ebe3af6bd1, type: 2}
+  - {fileID: 11400000, guid: 5e3937996c4f89743aabe48881be5c5d, type: 2}
+  - {fileID: 11400000, guid: af36d504890dc08458faa0c5c69d7143, type: 2}
   cardTemplate: {fileID: 2364117216660539220, guid: f7727ffd68b96b546907fb7b425f3534, type: 3}
 --- !u!114 &6581389771651725804
 MonoBehaviour:
