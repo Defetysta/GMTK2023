@@ -21,6 +21,7 @@ public class CardsGenerator
 		for (int i = 0; i < DefaultDeck.Length; i++)
 		{
 			Card newCard = GenerateCard(DefaultDeck[i]);
+			newCard.AvailableCardsContainer = AvailableCardsContainer;
 			cards.Add(newCard);
 		}
 
