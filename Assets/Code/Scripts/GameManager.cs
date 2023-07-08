@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
 	private PlayerHand playerHand;
 
 	[SerializeField]
-	private FighterStats enemyCombatController;
+	private Enemy enemyCombatController;
 	[SerializeField]
 	private FighterStats playerCombatController;
 
@@ -30,10 +30,11 @@ public class GameManager : MonoBehaviour
 
 	public Button startTurnButton;
 	public Button endTurnButton;
-	
+
+	private int enemyMoveCounter = 0;
 	private void Awake()
 	{
-		enemyStats.Display(enemyCombatController);
+		enemyStats.Display(enemyCombatController.Stats);
 		playerStats.Display(playerCombatController);
 		
 		playerHand.Initialize(discardPile);
@@ -64,15 +65,38 @@ public class GameManager : MonoBehaviour
 		} while (i < playerHand.CardSlots.Length);
 		
 		playerHand.EndTurn();
+
+		HandleEnemyMoves();
+		enemyStats.Display(enemyCombatController.Stats);
+		playerStats.Display(playerCombatController);
+	}
+
+	private void HandleEnemyMoves()
+	{
+		var enemyMoves = enemyCombatController.Moveset.Moves;
+
+		if (enemyMoveCounter >= enemyMoves.Length)
+		{
+			enemyMoveCounter = 0;
+		}
+
+		for (int j = 0; j < enemyMoves[enemyMoveCounter].Actions.Length; j++)
+		{
+			var stats = enemyMoves[enemyMoveCounter].Actions[j].GetStats();
+			var target = stats.TargetEnemy ? playerCombatController : enemyCombatController.Stats;
+			stats.ApplyEffect(target);
+		}
+
+		enemyMoveCounter++;
 	}
 
 	private void ApplyCard(Card usedCard)
 	{
-		var target = usedCard.CardStats.TargetEnemy ? enemyCombatController : playerCombatController;
+		var target = usedCard.CardStats.TargetEnemy ? enemyCombatController.Stats : playerCombatController;
 		usedCard.CardStats.ApplyEffect(target);
 		usedCard.Detach();
 		
-		enemyStats.Display(enemyCombatController);
+		enemyStats.Display(enemyCombatController.Stats);
 		playerStats.Display(playerCombatController);
 		discardPile.AddDiscardedCard(usedCard);
 		playerHand.RemoveCard(usedCard);
