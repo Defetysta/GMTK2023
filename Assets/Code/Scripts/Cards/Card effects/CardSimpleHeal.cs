@@ -12,6 +12,6 @@ public class CardSimpleHeal : CardStatsBase
 	public override void ApplyEffect(FighterStats target)
 	{
 		float finalHP = Mathf.Clamp(target.HP.Value + EffectValue, target.HP.Value + EffectValue, target.MaxHP);
-		target.HP.Value += finalHP;
+		target.HP.Value = finalHP;
 	}
 }
