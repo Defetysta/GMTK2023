@@ -31,10 +31,15 @@ public class GameManager : MonoBehaviour
 	public Button startTurnButton;
 
 	private int enemyMoveCounter = 0;
+	private Enemy enemyCombatControllerCopy;
+	private FighterStats playerCombatControllerCopy;
 	private void Awake()
 	{
-		enemyStats.Display(enemyCombatController.Stats);
-		playerStats.Display(playerCombatController);
+		enemyCombatControllerCopy = Instantiate(enemyCombatController);
+		enemyCombatControllerCopy.InitCopy();
+		playerCombatControllerCopy = Instantiate(playerCombatController);
+		enemyStats.Display(enemyCombatControllerCopy.Stats);
+		playerStats.Display(playerCombatControllerCopy);
 		
 		playerDeck.Initialize(discardPile);
 		
@@ -71,13 +76,13 @@ public class GameManager : MonoBehaviour
 		} while (i < playerHand.CardSlots.Length);
 
 		HandleEnemyMoves();
-		enemyStats.Display(enemyCombatController.Stats);
-		playerStats.Display(playerCombatController);
+		enemyStats.Display(enemyCombatControllerCopy.Stats);
+		playerStats.Display(playerCombatControllerCopy);
 	}
 
 	private void HandleEnemyMoves()
 	{
-		var enemyMoves = enemyCombatController.Moveset.Moves;
+		var enemyMoves = enemyCombatControllerCopy.Moveset.Moves;
 
 		if (enemyMoveCounter >= enemyMoves.Length)
 		{
@@ -87,7 +92,7 @@ public class GameManager : MonoBehaviour
 		for (int j = 0; j < enemyMoves[enemyMoveCounter].Actions.Length; j++)
 		{
 			var stats = enemyMoves[enemyMoveCounter].Actions[j].GetStats();
-			var target = stats.TargetEnemy ? playerCombatController : enemyCombatController.Stats;
+			var target = stats.TargetEnemy ? playerCombatControllerCopy : enemyCombatControllerCopy.Stats;
 			stats.ApplyEffect(target);
 		}
 
@@ -96,12 +101,12 @@ public class GameManager : MonoBehaviour
 
 	private void ApplyCard(Card usedCard)
 	{
-		var target = usedCard.CardStats.TargetEnemy ? enemyCombatController.Stats : playerCombatController;
+		var target = usedCard.CardStats.TargetEnemy ? enemyCombatControllerCopy.Stats : playerCombatControllerCopy;
 		usedCard.CardStats.ApplyEffect(target);
 		usedCard.Detach();
 		
-		enemyStats.Display(enemyCombatController.Stats);
-		playerStats.Display(playerCombatController);
+		enemyStats.Display(enemyCombatControllerCopy.Stats);
+		playerStats.Display(playerCombatControllerCopy);
 		discardPile.AddDiscardedCard(usedCard);
 	}
 }

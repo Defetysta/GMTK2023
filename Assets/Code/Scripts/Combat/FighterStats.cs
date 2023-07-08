@@ -17,16 +17,36 @@ public class FighterStats : ScriptableObject
 
 	private float maxHP;
 
-	public string FighterName => fighterName;
-	public FloatValue HP => myHP;
-	public FloatValue Armor => myArmor;
-	public FloatValue Strength => myStrength;
-	public FloatValue Posture => myPosture;
+	public string FighterName => fighterNameCopy;
+	public FloatValue HP => myHpCopy;
+	public FloatValue Armor => myArmorCopy;
+	public FloatValue Strength => myStrengthCopy;
+	public FloatValue Posture => myPostureCopy;
+
+	private string fighterNameCopy;
+	[NonSerialized]
+	public FloatValue myHpCopy;
+	[NonSerialized]
+	public FloatValue myArmorCopy;
+	[NonSerialized]
+	public FloatValue myStrengthCopy;
+	[NonSerialized]
+	public FloatValue myPostureCopy;
 
 	public float MaxHP => maxHP;
 
-	private void OnEnable()
+	public void InitCopy()
 	{
-		maxHP = HP.Value;
+		if (HP != null)
+		{
+			return;
+		}
+		
+		maxHP = Instantiate(myHP).Value;
+		fighterNameCopy = fighterName;
+		myHpCopy = Instantiate(myHP);
+		myArmorCopy = Instantiate(myArmor);
+		myStrengthCopy = Instantiate(myStrength);
+		myPostureCopy = Instantiate(myPosture);
 	}
 }

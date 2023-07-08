@@ -16,6 +16,11 @@ public class StatsDisplayer : MonoBehaviour
 
 	public void Display(FighterStats stats)
 	{
+		if (stats.HP == null)
+		{
+			stats.InitCopy();
+		}
+		
 		hpText.text = stats.HP.Value.ToString();
 		strText.text = stats.Strength.Value.ToString();
 		nameText.text = stats.FighterName;

@@ -9,7 +9,17 @@ public class Enemy : ScriptableObject
 	[SerializeField]
 	private FighterStats stats;
 
-	public Moveset Moveset => moveset;
+	private Moveset movesetCopy;
+	private FighterStats statsCopy;
 
-	public FighterStats Stats => stats;
+	public void InitCopy()
+	{
+		movesetCopy = Instantiate(moveset);
+		movesetCopy.InitCopy();
+		statsCopy = Instantiate(stats);
+		statsCopy.InitCopy();
+	}
+	public Moveset Moveset => movesetCopy;
+
+	public FighterStats Stats => statsCopy;
 }
