@@ -31,7 +31,6 @@ public class Deck : MonoBehaviour
 	private void Awake()
 	{
 		Shuffle(defaultDeck);
-		GetComponent<Button>().onClick.AddListener(Clicked);
 		
 		cardsGenerator = new CardsGenerator(cardTemplate, defaultDeck, availableCardsContainer);
 
@@ -81,28 +80,6 @@ public class Deck : MonoBehaviour
 		card.gameObject.SetActive(true);
 	}
 
-	public void Clicked()
-	{
-		if (Card.CurrentlySelected == null)
-		{
-			Debug.Log("No card selected, early return");
-			
-			return;
-		}
-
-		if (Card.CurrentlySelected.HolderCardSlot == null)
-		{
-			Debug.Log("Card doesn't have a holder; resetting currently selected; early return");
-			Card.CurrentlySelected = null;
-			
-			return;
-		}
-
-		Card.CurrentlySelected.transform.SetParent(availableCardsContainer);
-		Card.CurrentlySelected.Detach();
-		Card.CurrentlySelected = null;
-	}
-	
 	private void Shuffle<T>(IList<T> list)  
 	{  
 		var rng = new System.Random();

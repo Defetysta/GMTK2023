@@ -56,7 +56,16 @@ public class GameManager : MonoBehaviour
 		do
 		{
 			yield return new WaitForSeconds(timePerMove);
-			ApplyCard(playerHand.CardSlots[i].AttachedCard);
+			var cardToApply = playerHand.CardSlots[i].AttachedCard;
+			ApplyCard(cardToApply);
+
+			if (cardToApply.WasSwappedIn == true)
+			{
+				cardToApply.CardStats.WeakenEffect();
+				cardToApply.gameObject.name = "weakened_" + cardToApply.CardStats.EffectValue;
+				cardToApply.SetWasSwappedIn(false);
+			}
+			
 			i++;
 			
 		} while (i < playerHand.CardSlots.Length);

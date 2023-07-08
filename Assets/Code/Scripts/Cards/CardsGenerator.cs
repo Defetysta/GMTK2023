@@ -31,6 +31,8 @@ public class CardsGenerator
 	public Card GenerateCard(CardBase cardBase)
 	{
 		Card newCard = Object.Instantiate(CardTemplate);
+		var stats = cardBase.GetStats();
+		stats.ResetModifier();
 		newCard.SetCardStats(cardBase.GetStats());
 
 		return newCard;

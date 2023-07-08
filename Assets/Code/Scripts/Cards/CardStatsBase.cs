@@ -15,9 +15,17 @@ public abstract class CardStatsBase
 	private bool targetEnemy;
 	
 	public abstract int EffectValue { get; }
+	protected int modifier = 0;
 	public string CardName => cardName;
 	public Color EffectColor => effectColor;
 	public bool TargetEnemy => targetEnemy;
 
 	public abstract void ApplyEffect(FighterStats target);
+
+	public abstract void WeakenEffect();
+
+	public void ResetModifier()
+	{
+		modifier = 0;
+	}
 }

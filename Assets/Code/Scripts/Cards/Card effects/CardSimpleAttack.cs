@@ -7,7 +7,7 @@ public class CardSimpleAttack : CardStatsBase
 	[SerializeField]
 	private int attackValue;
 	
-	public override int EffectValue => attackValue;
+	public override int EffectValue => attackValue - modifier;
 
 	public override void ApplyEffect(FighterStats target)
 	{
@@ -23,5 +23,10 @@ public class CardSimpleAttack : CardStatsBase
 		{
 			target.HP.Value -= finalDamage;
 		}
+	}
+	
+	public override void WeakenEffect()
+	{
+		modifier++;
 	}
 }

@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,7 +15,8 @@ public class Card : MonoBehaviour
 	
 	public TextMeshProUGUI cardName;
 	public TextMeshProUGUI cardEffectText;
-	public TextMeshProUGUI cardDefenseText;
+	
+	public bool WasSwappedIn { get; private set; }
 
 	public CardSlot HolderCardSlot => holderCardSlot;
 
@@ -29,6 +31,14 @@ public class Card : MonoBehaviour
 	{
 		myButton.onClick.RemoveAllListeners();
 		CardSlot.CardSlotClicked -= CardSlotClicked;
+	}
+
+	private void OnEnable()
+	{
+		if (CardStats != null)
+		{
+			SetCardStats(CardStats);
+		}
 	}
 
 	#region UI Logic
@@ -55,7 +65,6 @@ public class Card : MonoBehaviour
 		{
 			if (holderCardSlot != null && CurrentlySelected != this)
 			{
-				// CurrentlySelected.HolderCardSlot.Swap(this);
 				Swap(CurrentlySelected);
 				CurrentlySelected = null;
 				Debug.Log(GetComponentInChildren<TextMeshProUGUI>().text);
@@ -87,6 +96,8 @@ public class Card : MonoBehaviour
 		{
 			transform.SetParent(AvailableCardsContainer);
 		}
+
+		newCard.WasSwappedIn = true;
 	}
 
 	public void Attach(CardSlot cardSlot)
@@ -125,6 +136,11 @@ public class Card : MonoBehaviour
 		cardName.text = CardStats.CardName;
 		cardEffectText.text = CardStats.EffectValue.ToString();
 		cardEffectText.color = CardStats.EffectColor;
+	}
+
+	public void SetWasSwappedIn(bool desiredValue)
+	{
+		WasSwappedIn = desiredValue;
 	}
 	
 	#endregion
