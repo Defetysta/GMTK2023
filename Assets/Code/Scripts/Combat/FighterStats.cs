@@ -29,19 +29,4 @@ public class FighterStats : ScriptableObject
 	{
 		maxHP = HP.Value;
 	}
-
-	public void TakeDamage(float initialDamage)
-	{
-		float finalDamage = initialDamage;
-		if (Armor.Value > 0)
-		{
-			finalDamage -= Armor.Value;
-			Armor.Value = Mathf.Clamp(Armor.Value, 0, Armor.Value - initialDamage);
-		}
-
-		if (finalDamage > 0)
-		{
-			HP.Value -= finalDamage;
-		}
-	}
 }

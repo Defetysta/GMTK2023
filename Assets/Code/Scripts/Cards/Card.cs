@@ -24,13 +24,11 @@ public class Card : MonoBehaviour
 	{
 		myButton = GetComponent<Button>();
 		myButton.onClick.AddListener(ButtonClicked);
-		CardSlot.CardSlotClicked += CardSlotClicked;
 	}
 
 	private void OnDestroy()
 	{
 		myButton.onClick.RemoveAllListeners();
-		CardSlot.CardSlotClicked -= CardSlotClicked;
 	}
 
 	private void OnEnable()
@@ -43,23 +41,11 @@ public class Card : MonoBehaviour
 
 	#region UI Logic
 	
-	private void CardSlotClicked(CardSlot targetSlot)
-	{
-		if (CurrentlySelected != this)
-		{
-			return;
-		}
-		
-		Attach(targetSlot);
-		CurrentlySelected = null;
-	}
-	
 	private void ButtonClicked()
 	{
 		if (CurrentlySelected == null)
 		{
 			CurrentlySelected = this;
-			Debug.Log(GetComponentInChildren<TextMeshProUGUI>().text);
 		}
 		else
 		{
@@ -67,7 +53,6 @@ public class Card : MonoBehaviour
 			{
 				Swap(CurrentlySelected);
 				CurrentlySelected = null;
-				Debug.Log(GetComponentInChildren<TextMeshProUGUI>().text);
 			}
 		}
 	}

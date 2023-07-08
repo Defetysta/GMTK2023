@@ -6,6 +6,5 @@ public class CardAttack : CardBase
 	[SerializeField]
 	private CardSimpleAttack stats;
 	
-	public CardStatsBase Stats => stats;
 	public override CardStatsBase GetStats() => stats;
 }
