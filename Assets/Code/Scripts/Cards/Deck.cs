@@ -8,6 +8,9 @@ using UnityEngine.UI;
 public class Deck : MonoBehaviour
 {
 	private const int CARDS_ON_TURN_START = 3;
+
+	[SerializeField]
+	private SimpleAudioEvent audioEvent;
 	
 	[SerializeField]
 	private Card cardTemplate;
@@ -124,6 +127,8 @@ public class Deck : MonoBehaviour
 			T value = list[k];  
 			list[k] = list[n];  
 			list[n] = value;  
-		}  
+		}
+
+		audioEvent.Play();
 	}
 }

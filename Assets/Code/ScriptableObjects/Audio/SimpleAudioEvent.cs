@@ -11,6 +11,18 @@ public class SimpleAudioEvent : AudioEvent
 	[MinMaxRange(0, 2)]
 	public RangedFloat pitch;
 
+	private AudioSource cachedGlobalSource;
+
+	public void Play()
+	{
+		if (cachedGlobalSource == null)
+		{
+			cachedGlobalSource = GameObject.FindGameObjectWithTag(GLOGAL_SFX_SOURCE).GetComponent<AudioSource>();
+		}
+		
+		Play(cachedGlobalSource);
+	}
+
 	public override void Play(AudioSource source)
 	{
 		if (clips.Length == 0) return;

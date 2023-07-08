@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -8,6 +7,9 @@ using UnityEngine.UI;
 public class Card : MonoBehaviour
 {
 	public static Card CurrentlySelected;
+
+	[SerializeField]
+	private SimpleAudioEvent moveCard;
 	
 	private Button myButton;
 	private CardSlot holderCardSlot;
@@ -105,6 +107,8 @@ public class Card : MonoBehaviour
 		deck.StartCoroutine(DelayByFrameAndResetRota());
 		holderCardSlot = cardSlot;
 		MoveToTarget(cardSlot.transform);
+		
+		moveCard?.Play();
 	}
 
 	public void Detach()
@@ -118,6 +122,8 @@ public class Card : MonoBehaviour
 		holderCardSlot.AttachedCard = null;
 		deck.StartCoroutine(DelayByFrameAndResetRota());
 		holderCardSlot = null;
+		
+		moveCard?.Play();
 	}
 	
 	public void TryDetach()
