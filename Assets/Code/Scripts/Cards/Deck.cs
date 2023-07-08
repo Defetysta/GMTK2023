@@ -129,6 +129,6 @@ public class Deck : MonoBehaviour
 			list[n] = value;  
 		}
 
-		audioEvent.Play();
+		audioEvent?.Play();
 	}
 }
