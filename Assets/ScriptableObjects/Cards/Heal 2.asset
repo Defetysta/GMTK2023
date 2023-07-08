@@ -9,11 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9ffedafc3dfd2e4d869b9574d988977, type: 3}
-  m_Name: SimpleAttack 1
+  m_Script: {fileID: 11500000, guid: db511abf9cbee6141b2ac1cbe87a9f8b, type: 3}
+  m_Name: Heal 2
   m_EditorClassIdentifier: 
   stats:
-    cardName: Att
-    effectColor: {r: 0.17254902, g: 0.85882354, b: 0.6283926, a: 1}
-    targetEnemy: 1
-    attackValue: 1
+    cardName: Heal
+    effectColor: {r: 0.3085279, g: 0.8867924, b: 0.16313636, a: 1}
+    targetEnemy: 0
+    healValue: 2
