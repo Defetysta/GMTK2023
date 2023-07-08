@@ -82,6 +82,11 @@ public class GameManager : MonoBehaviour
 		
 		do
 		{
+			if (playerCombatControllerCopy.IsInvulnerable == true)
+			{
+				playerCombatControllerCopy.Invulnerability--;
+			}
+			
 			yield return new WaitForSeconds(timePerMove);
 			var cardToApply = playerHand.CardSlots[i].AttachedCard;
 			ApplyCard(cardToApply);
@@ -140,6 +145,11 @@ public class GameManager : MonoBehaviour
 
 	private void HandleEnemyMoves()
 	{
+		if (enemyCombatControllerCopy.Stats.IsInvulnerable == true)
+		{
+			enemyCombatControllerCopy.Stats.Invulnerability--;
+		}
+		
 		for (int j = 0; j < enemyCardsThisTurn.Count; j++)
 		{
 			var target = enemyCardsThisTurn[j].TargetEnemy ? playerCombatControllerCopy : enemyCombatControllerCopy.Stats;
