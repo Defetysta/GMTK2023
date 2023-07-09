@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b779818372409044a656ca621818923, type: 3}
   m_Name: Medium
   m_EditorClassIdentifier: 
-  moveset: {fileID: 0}
-  stats: {fileID: 0}
+  moveset: {fileID: 11400000, guid: e84900cc6ba7d51408639d79984058f5, type: 2}
+  stats: {fileID: 11400000, guid: adbe85918ddc059428edfc5b332b9f4f, type: 2}

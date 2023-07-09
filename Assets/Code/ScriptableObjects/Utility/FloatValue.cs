@@ -7,33 +7,10 @@ public class FloatValue : ScriptableObject
 	[SerializeField]
 	private float defaultValue;
 
-	[SerializeField]
-	private bool resetToDefault;
-
-	private float changingValue;
-
 	private void OnEnable()
 	{
-		changingValue = defaultValue;
+		Value = defaultValue;
 	}
 
-	public float Value
-	{
-		get
-		{
-			return resetToDefault ? changingValue : defaultValue;
-		}
-		
-		set
-		{
-			if (resetToDefault)
-			{
-				changingValue = value;
-			}
-			else
-			{
-				defaultValue = value;
-			}
-		}
-	}
+	public float Value { get; set; }
 }

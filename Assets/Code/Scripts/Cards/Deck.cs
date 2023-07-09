@@ -30,12 +30,15 @@ public class Deck : MonoBehaviour
 	
 	private void Awake()
 	{
-		GetComponent<Button>().onClick.AddListener(Clicked);
+		Shuffle(defaultDeck);
 		
-		cardsGenerator = new CardsGenerator(cardTemplate, defaultDeck, availableCardsContainer);
+		cardsGenerator = new CardsGenerator(this, cardTemplate, defaultDeck, availableCardsContainer);
 
 		var newCards = cardsGenerator.InitializeDeck();
 		availableCards.AddRange(newCards);
+		
+		RetrieveDiscardedCards();
+		
 		numberOfAvailableCards.text = availableCards.Count.ToString();
 	}
 
@@ -46,40 +49,67 @@ public class Deck : MonoBehaviour
 		{
 			if (availableCards.Count == 0)
 			{
-				availableCards = discardPile.RetrieveDiscardedCards().ToList();
+				RetrieveDiscardedCards();
 			}
 
-			Card card = availableCards.FirstOrDefault();
-			card.transform.SetParent(availableCardsContainer);
-			card.gameObject.SetActive(true);
+			Card card = availableCards[0];
 			toDraw.Add(card);
 			availableCards.Remove(card);
 		}
 		
 		numberOfAvailableCards.text = availableCards.Count.ToString();
-		
+
+		foreach (Card x in toDraw)
+		{
+			if (x.gameObject.activeInHierarchy == false)
+			{
+				Debug.Log("hjjeher");
+
+				break;
+			}
+		}
+
 		return toDraw;
 	}
 
-	public void Clicked()
+	public void AddCardToPool(Card card)
 	{
-		if (Card.CurrentlySelected == null)
+		availableCards.Add(card);
+	}
+
+	public void RemoveCardFromPool(Card card)
+	{
+		availableCards.Remove(card);
+	}
+
+	private void RetrieveDiscardedCards()
+	{
+		availableCards.AddRange(discardPile.RetrieveDiscardedCards().ToList());
+
+		for (int i = 0; i < availableCards.Count; i++)
 		{
-			Debug.Log("No card selected, early return");
-			
-			return;
+			AddCardToDeck(availableCards[i]);
 		}
 
-		if (Card.CurrentlySelected.HolderCardSlot == null)
-		{
-			Debug.Log("Card doesn't have a holder; resetting currently selected; early return");
-			Card.CurrentlySelected = null;
-			
-			return;
-		}
+		Shuffle(availableCards);
+	}
 
-		Card.CurrentlySelected.transform.SetParent(availableCardsContainer);
-		Card.CurrentlySelected.Detach();
-		Card.CurrentlySelected = null;
+	private void AddCardToDeck(Card card)
+	{
+		card.transform.SetParent(availableCardsContainer);
+		card.gameObject.SetActive(true);
+	}
+
+	private void Shuffle<T>(IList<T> list)  
+	{  
+		var rng = new System.Random();
+		int n = list.Count;  
+		while (n > 1) {  
+			n--;  
+			int k = rng.Next(n + 1);  
+			T value = list[k];  
+			list[k] = list[n];  
+			list[n] = value;  
+		}  
 	}
 }

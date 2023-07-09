@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,51 +15,51 @@ public class Card : MonoBehaviour
 	
 	public TextMeshProUGUI cardName;
 	public TextMeshProUGUI cardEffectText;
-	public TextMeshProUGUI cardDefenseText;
+	
+	public bool WasSwappedIn { get; private set; }
 
 	public CardSlot HolderCardSlot => holderCardSlot;
 
+	private Deck deck;
+	
+	public void Init(Deck deck)
+	{
+		this.deck = deck;
+	}
+	
 	private void Awake()
 	{
 		myButton = GetComponent<Button>();
 		myButton.onClick.AddListener(ButtonClicked);
-		CardSlot.CardSlotClicked += CardSlotClicked;
 	}
 
 	private void OnDestroy()
 	{
 		myButton.onClick.RemoveAllListeners();
-		CardSlot.CardSlotClicked -= CardSlotClicked;
+	}
+
+	private void OnEnable()
+	{
+		if (CardStats != null)
+		{
+			SetCardStats(CardStats);
+		}
 	}
 
 	#region UI Logic
-	
-	private void CardSlotClicked(CardSlot targetSlot)
-	{
-		if (CurrentlySelected != this)
-		{
-			return;
-		}
-		
-		Attach(targetSlot);
-		CurrentlySelected = null;
-	}
 	
 	private void ButtonClicked()
 	{
 		if (CurrentlySelected == null)
 		{
 			CurrentlySelected = this;
-			Debug.Log(GetComponentInChildren<TextMeshProUGUI>().text);
 		}
 		else
 		{
 			if (holderCardSlot != null && CurrentlySelected != this)
 			{
-				// CurrentlySelected.HolderCardSlot.Swap(this);
 				Swap(CurrentlySelected);
 				CurrentlySelected = null;
-				Debug.Log(GetComponentInChildren<TextMeshProUGUI>().text);
 			}
 		}
 	}
@@ -87,6 +88,10 @@ public class Card : MonoBehaviour
 		{
 			transform.SetParent(AvailableCardsContainer);
 		}
+
+		newCard.WasSwappedIn = true;
+		deck.RemoveCardFromPool(newCard);
+		deck.AddCardToPool(this);
 	}
 
 	public void Attach(CardSlot cardSlot)
@@ -125,6 +130,11 @@ public class Card : MonoBehaviour
 		cardName.text = CardStats.CardName;
 		cardEffectText.text = CardStats.EffectValue.ToString();
 		cardEffectText.color = CardStats.EffectColor;
+	}
+
+	public void SetWasSwappedIn(bool desiredValue)
+	{
+		WasSwappedIn = desiredValue;
 	}
 	
 	#endregion

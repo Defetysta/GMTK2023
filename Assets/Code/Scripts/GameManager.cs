@@ -29,19 +29,21 @@ public class GameManager : MonoBehaviour
 	private Deck playerDeck;
 
 	public Button startTurnButton;
-	public Button endTurnButton;
 
 	private int enemyMoveCounter = 0;
+	private Enemy enemyCombatControllerCopy;
+	private FighterStats playerCombatControllerCopy;
 	private void Awake()
 	{
-		enemyStats.Display(enemyCombatController.Stats);
-		playerStats.Display(playerCombatController);
+		enemyCombatControllerCopy = Instantiate(enemyCombatController);
+		enemyCombatControllerCopy.InitCopy();
+		playerCombatControllerCopy = Instantiate(playerCombatController);
+		enemyStats.Display(enemyCombatControllerCopy.Stats);
+		playerStats.Display(playerCombatControllerCopy);
 		
-		playerHand.Initialize(discardPile);
 		playerDeck.Initialize(discardPile);
 		
 		startTurnButton.onClick.AddListener(StartTurn);
-		endTurnButton.onClick.AddListener(EndTurn);
 	}
 	private void StartTurn()
 	{
@@ -51,7 +53,7 @@ public class GameManager : MonoBehaviour
 	private IEnumerator PlayerTurn()
 	{
 		int i = 0;
-		
+
 		playerHand.AddCards(playerDeck.DrawCards());
 
 		yield return new WaitForSeconds(timeBeforeFirstMove);
@@ -59,21 +61,28 @@ public class GameManager : MonoBehaviour
 		do
 		{
 			yield return new WaitForSeconds(timePerMove);
-			ApplyCard(playerHand.CardSlots[i].AttachedCard);
+			var cardToApply = playerHand.CardSlots[i].AttachedCard;
+			ApplyCard(cardToApply);
+
+			if (cardToApply.WasSwappedIn == true)
+			{
+				cardToApply.CardStats.WeakenEffect();
+				cardToApply.gameObject.name = "weakened_" + cardToApply.CardStats.EffectValue;
+				cardToApply.SetWasSwappedIn(false);
+			}
+			
 			i++;
 			
 		} while (i < playerHand.CardSlots.Length);
-		
-		playerHand.EndTurn();
 
 		HandleEnemyMoves();
-		enemyStats.Display(enemyCombatController.Stats);
-		playerStats.Display(playerCombatController);
+		enemyStats.Display(enemyCombatControllerCopy.Stats);
+		playerStats.Display(playerCombatControllerCopy);
 	}
 
 	private void HandleEnemyMoves()
 	{
-		var enemyMoves = enemyCombatController.Moveset.Moves;
+		var enemyMoves = enemyCombatControllerCopy.Moveset.Moves;
 
 		if (enemyMoveCounter >= enemyMoves.Length)
 		{
@@ -83,7 +92,7 @@ public class GameManager : MonoBehaviour
 		for (int j = 0; j < enemyMoves[enemyMoveCounter].Actions.Length; j++)
 		{
 			var stats = enemyMoves[enemyMoveCounter].Actions[j].GetStats();
-			var target = stats.TargetEnemy ? playerCombatController : enemyCombatController.Stats;
+			var target = stats.TargetEnemy ? playerCombatControllerCopy : enemyCombatControllerCopy.Stats;
 			stats.ApplyEffect(target);
 		}
 
@@ -92,19 +101,12 @@ public class GameManager : MonoBehaviour
 
 	private void ApplyCard(Card usedCard)
 	{
-		var target = usedCard.CardStats.TargetEnemy ? enemyCombatController.Stats : playerCombatController;
+		var target = usedCard.CardStats.TargetEnemy ? enemyCombatControllerCopy.Stats : playerCombatControllerCopy;
 		usedCard.CardStats.ApplyEffect(target);
 		usedCard.Detach();
 		
-		enemyStats.Display(enemyCombatController.Stats);
-		playerStats.Display(playerCombatController);
+		enemyStats.Display(enemyCombatControllerCopy.Stats);
+		playerStats.Display(playerCombatControllerCopy);
 		discardPile.AddDiscardedCard(usedCard);
-		playerHand.RemoveCard(usedCard);
-	}
-
-	private void EndTurn()
-	{
-		playerHand.EndTurn();
-		StopAllCoroutines();
 	}
 }

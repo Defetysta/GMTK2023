@@ -172,7 +172,7 @@ MonoBehaviour:
   enemyStats: {fileID: 2371391516378070767}
   playerStats: {fileID: 2371391516378070766}
   playerHand: {fileID: 1600402411}
-  enemyCombatController: {fileID: 11400000, guid: 0015dc74f818ec84db2898bb15351925, type: 2}
+  enemyCombatController: {fileID: 11400000, guid: 66a1541a2fe2aaf4b9cb2b6ea15b36d6, type: 2}
   playerCombatController: {fileID: 11400000, guid: 7d4c118ef07be7e40bced4a0ede253db, type: 2}
   discardPile: {fileID: 981438178}
   playerDeck: {fileID: 1248692024}

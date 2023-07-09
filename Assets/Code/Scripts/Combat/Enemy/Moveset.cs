@@ -9,13 +9,32 @@ public class Moveset : ScriptableObject
 	public class MovesGroup
 	{
 		[SerializeField]
-		private CardBase[] actions;
+		private List<CardBase> actions;
 
-		public CardBase[] Actions => actions;
+		[NonSerialized]
+		private List<CardBase> actionsCopy;
+
+		public void InitCopy()
+		{
+			actionsCopy = new List<CardBase>(actions);
+
+			for (int i = 0; i < actionsCopy.Count; i++)
+			{
+				actionsCopy[i] = Instantiate(actions[i]);
+			}
+		}
+		public CardBase[] Actions => actionsCopy.ToArray();
 	}
 	
 	[SerializeField]
 	private MovesGroup[] moves;
 
+	public void InitCopy()
+	{
+		foreach (MovesGroup movesGroup in moves)
+		{
+			movesGroup.InitCopy();
+		}
+	}
 	public MovesGroup[] Moves => moves;
 }
