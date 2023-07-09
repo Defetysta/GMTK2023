@@ -113,6 +113,26 @@ public class GameManager : MonoBehaviour
 				i++;
 
 			} while (i < playerHand.CardSlots.Length);
+			
+			if (currentEnemyCombatController.Stats.HP.Value <= 0)
+			{
+				// for (int j = 0; j < playerHand.CardSlots.Length; j++)
+				// {
+				// 	playerHand.CardSlots[j].AttachedCard?.Detach();
+				// }
+			
+				currentEnemyCombatController = enemiesSequenceController.GetNextEnemy();
+				discardPile.RetrieveDiscardedCards();
+
+				playerDeck.PrepareDeck();
+
+				if (currentEnemyCombatController == null)
+				{
+					Debug.Log("Victory!");
+				
+					yield break;
+				}
+			}
 
 			HandleEnemyMoves();
 			enemyStats.Display(currentEnemyCombatController.Stats);
