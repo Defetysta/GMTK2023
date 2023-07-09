@@ -9,12 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8630f3a480310d84d9026be828fa18c3, type: 3}
-  m_Name: EnemyDefend 1
+  m_Script: {fileID: 11500000, guid: 13a9f940313d06d4caed9863bf024ebf, type: 3}
+  m_Name: DeckShuffle
   m_EditorClassIdentifier: 
-  stats:
-    cardSprite: {fileID: 0}
-    cardName: Def
-    effectColor: {r: 0.16464934, g: 0.3342791, b: 0.9433962, a: 1}
-    targetEnemy: 0
-    defenseValue: 3
+  clips:
+  - {fileID: 8300000, guid: d33c533bfca064246baeb78390dbb212, type: 3}
+  volume:
+    minValue: 0.5194805
+    maxValue: 0.5779221
+  pitch:
+    minValue: 1.2727273
+    maxValue: 1.987013

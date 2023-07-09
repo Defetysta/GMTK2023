@@ -15,15 +15,16 @@ public class FighterStats : ScriptableObject
 	[SerializeField]
 	private FloatValue myPosture;
 
-	private float maxHP;
-
 	public string FighterName => fighterNameCopy;
 	public FloatValue HP => myHpCopy;
 	public FloatValue Armor => myArmorCopy;
 	public FloatValue Strength => myStrengthCopy;
 	public FloatValue Posture => myPostureCopy;
 
+	private float maxHP;
+	public float MaxHP => maxHP;
 	private string fighterNameCopy;
+	
 	[NonSerialized]
 	public FloatValue myHpCopy;
 	[NonSerialized]
@@ -32,8 +33,9 @@ public class FighterStats : ScriptableObject
 	public FloatValue myStrengthCopy;
 	[NonSerialized]
 	public FloatValue myPostureCopy;
+	
+	public int ParalysisDuration { get; set; }
 
-	public float MaxHP => maxHP;
 
 	public void InitCopy()
 	{

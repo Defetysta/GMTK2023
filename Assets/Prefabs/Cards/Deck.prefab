@@ -52,6 +52,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 257e2406c0b50dd4485b0684f665e08e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioEvent: {fileID: 0}
   cardTemplate: {fileID: 2364117216660539220, guid: f7727ffd68b96b546907fb7b425f3534, type: 3}
   defaultDeck:
   - {fileID: 11400000, guid: 31a5d8ed66dd6f54595bf0de49617807, type: 2}
@@ -63,6 +64,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6c380b18e45408b4ea6809fa70f63c5d, type: 2}
   - {fileID: 11400000, guid: 81ba367cdcf2a2e4c9d6d4ad46b43b2d, type: 2}
   - {fileID: 11400000, guid: af36d504890dc08458faa0c5c69d7143, type: 2}
+  - {fileID: 11400000, guid: 24f8002058f0c4542900e1857f09faf6, type: 2}
   availableCardsContainer: {fileID: 0}
   numberOfAvailableCards: {fileID: 7330883988780556972}
   cardsPanel: {fileID: 0}

@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: EnemyHeal 2
   m_EditorClassIdentifier: 
   stats:
+    cardSprite: {fileID: 0}
     cardName: Heal
     effectColor: {r: 0.3085279, g: 0.8867924, b: 0.16313636, a: 1}
     targetEnemy: 0
-    healValue: 4
+    healValue: 2

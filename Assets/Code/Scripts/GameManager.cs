@@ -78,6 +78,7 @@ public class GameManager : MonoBehaviour
 		{
 			enemyMoveCounter = 0;
 		}
+
 		enemyCardsThisTurn.Clear();
 
 		DisplayEnemyIntents(enemyMoves);
@@ -87,65 +88,76 @@ public class GameManager : MonoBehaviour
 		playerHand.AddCards(playerDeck.DrawCards());
 
 		yield return new WaitForSeconds(timeBeforeFirstMove);
-		
-		do
+
+		if (playerCombatControllerCopy.ParalysisDuration > 0)
 		{
-			yield return new WaitForSeconds(timePerMove);
-			var cardToApply = playerHand.CardSlots[i].AttachedCard;
-			ApplyCard(cardToApply);
-
-			if (cardToApply.WasSwappedIn == true)
-			{
-				cardToApply.CardStats.WeakenEffect();
-				cardToApply.gameObject.name = "weakened_" + cardToApply.CardStats.EffectValue;
-				cardToApply.SetWasSwappedIn(false);
-			}
-			
-			i++;
-			
-		} while (i < playerHand.CardSlots.Length);
-		
-		playerDeck.CardsPanel.SetActive(false);
-
-		if (currentEnemyCombatController.Stats.HP.Value <= 0)
+			playerCombatControllerCopy.ParalysisDuration--;
+		}
+		else
 		{
-			// for (int j = 0; j < playerHand.CardSlots.Length; j++)
-			// {
-			// 	playerHand.CardSlots[j].AttachedCard?.Detach();
-			// }
-			
-			currentEnemyCombatController = enemiesSequenceController.GetNextEnemy();
-			discardPile.RetrieveDiscardedCards();
-
-			playerDeck.PrepareDeck();
-
-			if (currentEnemyCombatController == null)
+			do
 			{
-				Debug.Log("Victory!");
+				playerCombatControllerCopy.Armor.Value = 0;
+
+				yield return new WaitForSeconds(timePerMove);
+				var cardToApply = playerHand.CardSlots[i].AttachedCard;
+				ApplyCard(cardToApply);
+
+				if (cardToApply.WasSwappedIn == true)
+				{
+					cardToApply.CardStats.WeakenEffect();
+					cardToApply.gameObject.name = "weakened_" + cardToApply.CardStats.EffectValue;
+					cardToApply.SetWasSwappedIn(false);
+				}
+
+				i++;
+
+			} while (i < playerHand.CardSlots.Length);
+			
+			if (currentEnemyCombatController.Stats.HP.Value <= 0)
+			{
+				// for (int j = 0; j < playerHand.CardSlots.Length; j++)
+				// {
+				// 	playerHand.CardSlots[j].AttachedCard?.Detach();
+				// }
+			
+				currentEnemyCombatController = enemiesSequenceController.GetNextEnemy();
+				discardPile.RetrieveDiscardedCards();
+
+				playerDeck.PrepareDeck();
+
+				if (currentEnemyCombatController == null)
+				{
+					Debug.Log("Victory!");
 				
-				yield break;
+					yield break;
+				}
 			}
+
+			HandleEnemyMoves();
+			enemyStats.Display(currentEnemyCombatController.Stats);
+			playerStats.Display(playerCombatControllerCopy);
+
+			if (playerCombatControllerCopy.HP.Value <= 0)
+			{
+				gameOverView.gameObject.SetActive(true);
+
+				// gameOverSound.Play();
+			}
+
+			// yield return StartCoroutine(PlayerTurn());
+			startTurnButton.gameObject.SetActive(true);
 		}
-
-		HandleEnemyMoves();
-		enemyStats.Display(currentEnemyCombatController.Stats);
-		playerStats.Display(playerCombatControllerCopy);
-
-		if (playerCombatControllerCopy.HP.Value <= 0)
-		{
-			gameOverView.gameObject.SetActive(true);
-			// gameOverSound.Play();
-		}
-
-		// yield return StartCoroutine(PlayerTurn());
-		startTurnButton.gameObject.SetActive(true);
 	}
 
 	private void DisplayEnemyIntents(Moveset.MovesGroup[] enemyMoves)
 	{
+		currentEnemyCombatController.Stats.Armor.Value = 0;
+		
 		int totalEnemyDamage = 0;
 		int totalEnemyArmor = 0;
 		int totalEnemyHealing = 0;
+
 
 		var actions = enemyMoves[enemyMoveCounter].Actions;
 		for (int i = 0; i < actions.Length; i++)
@@ -179,6 +191,14 @@ public class GameManager : MonoBehaviour
 
 	private void HandleEnemyMoves()
 	{
+		if (currentEnemyCombatController.Stats.ParalysisDuration > 0)
+		{
+			currentEnemyCombatController.Stats.ParalysisDuration--;
+
+			return;
+		}
+
+		
 		for (int j = 0; j < enemyCardsThisTurn.Count; j++)
 		{
 			var target = enemyCardsThisTurn[j].TargetEnemy ? playerCombatControllerCopy : currentEnemyCombatController.Stats;

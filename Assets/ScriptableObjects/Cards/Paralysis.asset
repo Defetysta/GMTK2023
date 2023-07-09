@@ -9,12 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8630f3a480310d84d9026be828fa18c3, type: 3}
-  m_Name: EnemyDefend 1
+  m_Script: {fileID: 11500000, guid: 642dbc79942e7314a8f39c7aade8a779, type: 3}
+  m_Name: Paralysis
   m_EditorClassIdentifier: 
   stats:
-    cardSprite: {fileID: 0}
-    cardName: Def
-    effectColor: {r: 0.16464934, g: 0.3342791, b: 0.9433962, a: 1}
-    targetEnemy: 0
-    defenseValue: 3
+    cardSprite: {fileID: 21300000, guid: 79707014d6013dc42b66fb52b9efcb01, type: 3}
+    cardName: Par
+    effectColor: {r: 0, g: 1, b: 0.80083776, a: 0}
+    targetEnemy: 1
+    effectDuration: 1

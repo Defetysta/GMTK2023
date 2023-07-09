@@ -17,4 +17,4 @@ MonoBehaviour:
     cardName: Att
     effectColor: {r: 0.6745098, g: 0.90196085, b: 1, a: 1}
     targetEnemy: 1
-    attackValue: 3
+    attackValue: 6
