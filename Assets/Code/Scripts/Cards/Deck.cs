@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
@@ -16,12 +17,25 @@ public class Deck : MonoBehaviour
 	private Transform availableCardsContainer;
 	[SerializeField]
 	private TextMeshProUGUI numberOfAvailableCards;
+
+	[SerializeField]
+	private GameObject cardsPanel;
+	[SerializeField]
+	private Button deckButton;
+
+	public GameObject CardsPanel => cardsPanel;
 	
 	private List<Card> availableCards = new List<Card>();
 	public List<Card> AvailableCards => availableCards;
 
 	private CardsGenerator cardsGenerator;
 	private DiscardPile discardPile;
+
+	private void Awake()
+	{
+		deckButton.onClick.AddListener( () => cardsPanel.SetActive(cardsPanel.activeSelf == false));
+		cardsPanel.SetActive(false);
+	}
 
 	public void Initialize(DiscardPile discardPile)
 	{
