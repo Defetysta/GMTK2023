@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class MainMenuController : MonoBehaviour
 {
-	private const string GAME_SCENE_NAME = "GameScene";
+	private const string TUTORIAL_SCENE_NAME = "TutorialScene";
 	
 	[SerializeField]
 	private Button startGameButton;
@@ -38,7 +38,7 @@ public class MainMenuController : MonoBehaviour
 
 	private void StarGame()
 	{
-		SceneManager.LoadScene(GAME_SCENE_NAME);
+		SceneManager.LoadScene(TUTORIAL_SCENE_NAME);
 	}
 
 	private void QuitGame()
