@@ -197,6 +197,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4097838cb667d02458a3baefe4fe74fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveCard: {fileID: 11400000, guid: 8ad75899de1fe3e47a2f43300acbed97, type: 2}
   AvailableCardsContainer: {fileID: 0}
   cardName: {fileID: 5748390652708900694}
   cardEffectText: {fileID: 150091641965694837}

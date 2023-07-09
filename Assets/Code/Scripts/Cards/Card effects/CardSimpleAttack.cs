@@ -6,6 +6,9 @@ public class CardSimpleAttack : CardStatsBase
 {
 	[SerializeField]
 	private int attackValue;
+
+	[SerializeField]
+	private SimpleAudioEvent audioEvent;
 	
 	public override int EffectValue => attackValue - modifier;
 
@@ -23,6 +26,8 @@ public class CardSimpleAttack : CardStatsBase
 		{
 			target.HP.Value -= finalDamage;
 		}
+		
+		audioEvent?.Play();
 	}
 	
 	public override void WeakenEffect()
