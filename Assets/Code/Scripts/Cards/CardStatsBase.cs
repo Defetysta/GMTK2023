@@ -19,6 +19,7 @@ public abstract class CardStatsBase
 	public string CardName => cardName;
 	public Color EffectColor => effectColor;
 	public bool TargetEnemy => targetEnemy;
+	public bool IsCardUseable => EffectValue > 0;
 
 	public abstract void ApplyEffect(FighterStats target);
 

@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -12,10 +13,24 @@ public class DiscardPile : MonoBehaviour
 
 	public void AddDiscardedCard(Card discardedCard)
 	{
-		discardedCards.Add(discardedCard);
 		discardedCard.gameObject.SetActive(false);
 		discardedCard.transform.SetParent(transform);
-		numberOfDiscardedCards.text = discardedCards.Count.ToString();
+
+		StartCoroutine(DelayAddingToDiscarded(discardedCard));
+
+	}
+
+	private IEnumerator DelayAddingToDiscarded(Card discardedCard)
+	{
+		// due to the way the flow works, the card is first used, then discarded, and THEN weakened. So I use this hack
+		// to make sure that the check for useability is made after the weakening
+		yield return null;
+		
+		if (discardedCard.CardStats.IsCardUseable == true)
+		{
+			discardedCards.Add(discardedCard);
+			numberOfDiscardedCards.text = discardedCards.Count.ToString();
+		}
 	}
 
 	public IReadOnlyList<Card> RetrieveDiscardedCards()
