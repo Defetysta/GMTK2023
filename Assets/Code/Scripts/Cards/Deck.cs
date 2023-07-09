@@ -33,7 +33,7 @@ public class Deck : MonoBehaviour
 
 	private void Awake()
 	{
-		deckButton.onClick.AddListener( () => cardsPanel.SetActive(true));
+		deckButton.onClick.AddListener( () => cardsPanel.SetActive(cardsPanel.activeSelf == false));
 		cardsPanel.SetActive(false);
 	}
 
