@@ -154,13 +154,6 @@ public class GameManager : MonoBehaviour
 	{
 		currentEnemyCombatController.Stats.Armor.Value = 0;
 		
-		if (currentEnemyCombatController.Stats.ParalysisDuration > 0)
-		{
-			currentEnemyCombatController.Stats.ParalysisDuration--;
-
-			return;
-		}
-		
 		int totalEnemyDamage = 0;
 		int totalEnemyArmor = 0;
 		int totalEnemyHealing = 0;
@@ -198,6 +191,14 @@ public class GameManager : MonoBehaviour
 
 	private void HandleEnemyMoves()
 	{
+		if (currentEnemyCombatController.Stats.ParalysisDuration > 0)
+		{
+			currentEnemyCombatController.Stats.ParalysisDuration--;
+
+			return;
+		}
+
+		
 		for (int j = 0; j < enemyCardsThisTurn.Count; j++)
 		{
 			var target = enemyCardsThisTurn[j].TargetEnemy ? playerCombatControllerCopy : currentEnemyCombatController.Stats;

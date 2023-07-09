@@ -332,7 +332,10 @@ MonoBehaviour:
     each time the card will get weaker
 
     If the card runs out of power, it''s
-    incinerated'
+    incinerated
+
+
+    Shock the enemy to stop them for a turn'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 25ae2f315cad3e2488573b13967a09a5, type: 2}
   m_sharedMaterial: {fileID: -6302449145402926564, guid: 25ae2f315cad3e2488573b13967a09a5, type: 2}
