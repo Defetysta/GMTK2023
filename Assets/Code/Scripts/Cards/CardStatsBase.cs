@@ -5,6 +5,9 @@ using UnityEngine;
 public abstract class CardStatsBase
 {
 	[SerializeField]
+	private Sprite cardSprite;
+	
+	[SerializeField]
 	private string cardName;
 
 	[SerializeField]
@@ -16,6 +19,7 @@ public abstract class CardStatsBase
 	
 	public abstract int EffectValue { get; }
 	protected int modifier = 0;
+	public Sprite CardSprite => cardSprite;
 	public string CardName => cardName;
 	public Color EffectColor => effectColor;
 	public bool TargetEnemy => targetEnemy;

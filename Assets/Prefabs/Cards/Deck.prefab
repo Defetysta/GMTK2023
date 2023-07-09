@@ -65,6 +65,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: af36d504890dc08458faa0c5c69d7143, type: 2}
   availableCardsContainer: {fileID: 0}
   numberOfAvailableCards: {fileID: 7330883988780556972}
+  cardsPanel: {fileID: 0}
+  deckButton: {fileID: 5144562200524820202}
 --- !u!222 &4434005302928225892
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -166,12 +168,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 49.6
+  m_fontSize: 36
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 12
-  m_fontSizeMax: 72
+  m_fontSizeMax: 36
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512

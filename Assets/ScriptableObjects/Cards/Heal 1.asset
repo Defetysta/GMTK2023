@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Heal 1
   m_EditorClassIdentifier: 
   stats:
+    cardSprite: {fileID: 21300000, guid: d0ccdf6f47fcf3847ae429ea1bcdc4c1, type: 3}
     cardName: Heal
-    effectColor: {r: 0.3085279, g: 0.8867924, b: 0.16313636, a: 1}
+    effectColor: {r: 0.9843138, g: 0.6313726, b: 1, a: 1}
     targetEnemy: 0
     healValue: 1

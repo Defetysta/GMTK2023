@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,6 +17,9 @@ public class Card : MonoBehaviour
 	
 	public TextMeshProUGUI cardName;
 	public TextMeshProUGUI cardEffectText;
+
+	[SerializeField]
+	private Image cardImage;
 	
 	public bool WasSwappedIn { get; private set; }
 
@@ -29,7 +34,7 @@ public class Card : MonoBehaviour
 	
 	private void Awake()
 	{
-		myButton = GetComponent<Button>();
+		myButton = GetComponentInChildren<Button>(true);
 		myButton.onClick.AddListener(ButtonClicked);
 	}
 
@@ -97,6 +102,7 @@ public class Card : MonoBehaviour
 	public void Attach(CardSlot cardSlot)
 	{
 		cardSlot.AttachedCard = this;
+		deck.StartCoroutine(DelayByFrameAndResetRota());
 		holderCardSlot = cardSlot;
 		MoveToTarget(cardSlot.transform);
 	}
@@ -110,6 +116,7 @@ public class Card : MonoBehaviour
 		}
 #endif
 		holderCardSlot.AttachedCard = null;
+		deck.StartCoroutine(DelayByFrameAndResetRota());
 		holderCardSlot = null;
 	}
 	
@@ -123,7 +130,15 @@ public class Card : MonoBehaviour
 		}
 		
 		holderCardSlot.AttachedCard = null;
+		deck.StartCoroutine(DelayByFrameAndResetRota());
 		holderCardSlot = null;
+	}
+
+	private IEnumerator DelayByFrameAndResetRota()
+	{
+		yield return null;
+		
+		transform.localRotation = Quaternion.identity;
 	}
 
 	#endregion
@@ -133,7 +148,8 @@ public class Card : MonoBehaviour
 	public void SetCardStats(CardStatsBase stats)
 	{
 		CardStats = stats;
-		cardName.text = CardStats.CardName;
+		// cardName.text = CardStats.CardName;
+		cardImage.sprite = stats?.CardSprite;
 		cardEffectText.text = CardStats.EffectValue.ToString();
 		cardEffectText.color = CardStats.EffectColor;
 	}

@@ -110,9 +110,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6272529998819213959}
     m_Modifications:
+    - target: {fileID: 74431946278887210, guid: 3e674d5069cd30c48883b12920abb984, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3283930783663114042, guid: 3e674d5069cd30c48883b12920abb984, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8571446206468323958, guid: 3e674d5069cd30c48883b12920abb984, type: 3}
       propertyPath: m_Name
       value: SettingsView
+      objectReference: {fileID: 0}
+    - target: {fileID: 8571446206468323958, guid: 3e674d5069cd30c48883b12920abb984, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8571446206468323959, guid: 3e674d5069cd30c48883b12920abb984, type: 3}
       propertyPath: m_Pivot.x

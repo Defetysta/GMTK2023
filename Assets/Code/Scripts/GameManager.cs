@@ -71,6 +71,7 @@ public class GameManager : MonoBehaviour
 
 	private IEnumerator PlayerTurn()
 	{
+		startTurnButton.gameObject.SetActive(false);
 		var enemyMoves = currentEnemyCombatController.Moveset.Moves;
 
 		if (enemyMoveCounter >= enemyMoves.Length)
@@ -103,6 +104,8 @@ public class GameManager : MonoBehaviour
 			i++;
 			
 		} while (i < playerHand.CardSlots.Length);
+		
+		playerDeck.CardsPanel.SetActive(false);
 
 		if (currentEnemyCombatController.Stats.HP.Value <= 0)
 		{
@@ -134,7 +137,8 @@ public class GameManager : MonoBehaviour
 			// gameOverSound.Play();
 		}
 
-		yield return StartCoroutine(PlayerTurn());
+		// yield return StartCoroutine(PlayerTurn());
+		startTurnButton.gameObject.SetActive(true);
 	}
 
 	private void DisplayEnemyIntents(Moveset.MovesGroup[] enemyMoves)

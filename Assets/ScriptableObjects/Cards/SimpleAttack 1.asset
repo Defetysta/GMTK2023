@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: SimpleAttack 1
   m_EditorClassIdentifier: 
   stats:
+    cardSprite: {fileID: 21300000, guid: 03a3ec7506cf2e846ab5800f405fdc64, type: 3}
     cardName: Att
-    effectColor: {r: 0.17254902, g: 0.85882354, b: 0.6283926, a: 1}
+    effectColor: {r: 0.6745098, g: 0.90196085, b: 1, a: 1}
     targetEnemy: 1
     attackValue: 1
