@@ -181,9 +181,9 @@ public class GameManager : MonoBehaviour
 			enemyCardsThisTurn[j].ApplyEffect(target);
 		}
 
-		attackIntent.text = String.Empty;
-		defendIntent.text = String.Empty;
-		healIntent.text = String.Empty;
+		attackIntent.text = "?";
+		defendIntent.text = "?";
+		healIntent.text = "?";
 		
 		enemyMoveCounter++;
 	}
