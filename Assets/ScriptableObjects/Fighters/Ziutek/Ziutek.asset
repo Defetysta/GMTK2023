@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab8be1f37f55dc64195d8d94f7f8211e, type: 3}
+  m_Name: Ziutek
+  m_EditorClassIdentifier: 
+  fighterName: Ziutek
+  myHP: {fileID: 11400000, guid: 63755070eae9854419bec97d7c29a757, type: 2}
+  myArmor: {fileID: 11400000, guid: 9c41ba73d8689b14a862fe89a9bce06e, type: 2}
+  myStrength: {fileID: 11400000, guid: bd2280be9e6455a4baca3f2eb42760fa, type: 2}
+  myPosture: {fileID: 11400000, guid: 803e4b0145cbc0444b2fc61525a6d600, type: 2}
