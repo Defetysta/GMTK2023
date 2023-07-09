@@ -28,7 +28,7 @@ public class Deck : MonoBehaviour
 		this.discardPile = discardPile;
 	}
 	
-	private void Awake()
+	public void PrepareDeck()
 	{
 		Shuffle(defaultDeck);
 		

@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
 	private PlayerHand playerHand;
 
 	[SerializeField]
-	private Enemy enemyCombatController;
+	private EnemiesSequenceController enemiesSequenceController;
 	[SerializeField]
 	private FighterStats playerCombatController;
 
@@ -47,19 +47,20 @@ public class GameManager : MonoBehaviour
 	public Button startTurnButton;
 
 	private int enemyMoveCounter = 0;
-	private Enemy enemyCombatControllerCopy;
+	private Enemy currentEnemyCombatController;
 	private FighterStats playerCombatControllerCopy;
 
 	private List<CardStatsBase> enemyCardsThisTurn = new();
 	private void Awake()
 	{
-		enemyCombatControllerCopy = Instantiate(enemyCombatController);
-		enemyCombatControllerCopy.InitCopy();
+		currentEnemyCombatController = enemiesSequenceController.GetNextEnemy();
+		
 		playerCombatControllerCopy = Instantiate(playerCombatController);
-		enemyStats.Display(enemyCombatControllerCopy.Stats);
+		enemyStats.Display(currentEnemyCombatController.Stats);
 		playerStats.Display(playerCombatControllerCopy);
 		
 		playerDeck.Initialize(discardPile);
+		playerDeck.PrepareDeck();
 		
 		startTurnButton.onClick.AddListener(StartTurn);
 	}
@@ -70,7 +71,7 @@ public class GameManager : MonoBehaviour
 
 	private IEnumerator PlayerTurn()
 	{
-		var enemyMoves = enemyCombatControllerCopy.Moveset.Moves;
+		var enemyMoves = currentEnemyCombatController.Moveset.Moves;
 
 		if (enemyMoveCounter >= enemyMoves.Length)
 		{
@@ -103,8 +104,28 @@ public class GameManager : MonoBehaviour
 			
 		} while (i < playerHand.CardSlots.Length);
 
+		if (currentEnemyCombatController.Stats.HP.Value <= 0)
+		{
+			// for (int j = 0; j < playerHand.CardSlots.Length; j++)
+			// {
+			// 	playerHand.CardSlots[j].AttachedCard?.Detach();
+			// }
+			
+			currentEnemyCombatController = enemiesSequenceController.GetNextEnemy();
+			discardPile.RetrieveDiscardedCards();
+
+			playerDeck.PrepareDeck();
+
+			if (currentEnemyCombatController == null)
+			{
+				Debug.Log("Victory!");
+				
+				yield break;
+			}
+		}
+
 		HandleEnemyMoves();
-		enemyStats.Display(enemyCombatControllerCopy.Stats);
+		enemyStats.Display(currentEnemyCombatController.Stats);
 		playerStats.Display(playerCombatControllerCopy);
 
 		if (playerCombatControllerCopy.HP.Value <= 0)
@@ -112,6 +133,8 @@ public class GameManager : MonoBehaviour
 			gameOverView.gameObject.SetActive(true);
 			// gameOverSound.Play();
 		}
+
+		yield return StartCoroutine(PlayerTurn());
 	}
 
 	private void DisplayEnemyIntents(Moveset.MovesGroup[] enemyMoves)
@@ -154,7 +177,7 @@ public class GameManager : MonoBehaviour
 	{
 		for (int j = 0; j < enemyCardsThisTurn.Count; j++)
 		{
-			var target = enemyCardsThisTurn[j].TargetEnemy ? playerCombatControllerCopy : enemyCombatControllerCopy.Stats;
+			var target = enemyCardsThisTurn[j].TargetEnemy ? playerCombatControllerCopy : currentEnemyCombatController.Stats;
 			enemyCardsThisTurn[j].ApplyEffect(target);
 		}
 
@@ -167,11 +190,11 @@ public class GameManager : MonoBehaviour
 
 	private void ApplyCard(Card usedCard)
 	{
-		var target = usedCard.CardStats.TargetEnemy ? enemyCombatControllerCopy.Stats : playerCombatControllerCopy;
+		var target = usedCard.CardStats.TargetEnemy ? currentEnemyCombatController.Stats : playerCombatControllerCopy;
 		usedCard.CardStats.ApplyEffect(target);
 		usedCard.Detach();
 		
-		enemyStats.Display(enemyCombatControllerCopy.Stats);
+		enemyStats.Display(currentEnemyCombatController.Stats);
 		playerStats.Display(playerCombatControllerCopy);
 		discardPile.AddDiscardedCard(usedCard);
 	}
