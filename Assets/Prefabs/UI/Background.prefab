@@ -37,7 +37,7 @@ RectTransform:
   m_AnchorMin: {x: 0.30388573, y: 0.24700001}
   m_AnchorMax: {x: 0.70977145, y: 0.971434}
   m_AnchoredPosition: {x: -3.600006, y: 1.6000061}
-  m_SizeDelta: {x: 5.100006, y: -1.7000122}
+  m_SizeDelta: {x: 5.100006, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5787974618707560661
 CanvasRenderer:
@@ -130,7 +130,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6842510830322969458}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.11222853, y: 0.148}
   m_AnchorMax: {x: 0.88945717, y: 0.59428924}
@@ -326,8 +326,8 @@ RectTransform:
   m_Children:
   - {fileID: 3452482609537172105}
   - {fileID: 756050255212967055}
-  - {fileID: 5673974088362166947}
   - {fileID: 1914792497732730394}
+  - {fileID: 5673974088362166947}
   - {fileID: 4330948228720754181}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -462,6 +462,7 @@ GameObject:
   - component: {fileID: 5673974088362166947}
   - component: {fileID: 836960986169838950}
   - component: {fileID: 380963381458044820}
+  - component: {fileID: 9069779699276981702}
   m_Layer: 5
   m_Name: Table
   m_TagString: Untagged
@@ -482,7 +483,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6842510830322969458}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
@@ -527,3 +528,24 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!95 &9069779699276981702
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7389015171648146700}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8dc04d6a422e9d64b84c71da13be80f5, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
