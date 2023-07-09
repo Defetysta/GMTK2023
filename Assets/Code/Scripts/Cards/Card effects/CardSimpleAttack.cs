@@ -11,6 +11,11 @@ public class CardSimpleAttack : CardStatsBase
 
 	public override void ApplyEffect(FighterStats target)
 	{
+		if (target.IsInvulnerable == true)
+		{
+			return;
+		}
+		
 		float finalDamage = EffectValue;
 		if (target.Armor.Value > 0)
 		{

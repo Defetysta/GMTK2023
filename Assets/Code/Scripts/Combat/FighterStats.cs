@@ -34,6 +34,9 @@ public class FighterStats : ScriptableObject
 	public FloatValue myPostureCopy;
 
 	public float MaxHP => maxHP;
+	
+	public int Invulnerability { get; set; }
+	public bool IsInvulnerable => Invulnerability > 0;
 
 	public void InitCopy()
 	{
