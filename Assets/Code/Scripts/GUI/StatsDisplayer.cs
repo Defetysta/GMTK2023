@@ -6,8 +6,8 @@ public class StatsDisplayer : MonoBehaviour
 {
 	[SerializeField]
 	private TextMeshProUGUI hpText;
-	[SerializeField]
-	private TextMeshProUGUI maxHpText;
+	// [SerializeField]
+	// private TextMeshProUGUI maxHpText;
 
 	[SerializeField]
 	private Slider hpSlider;
