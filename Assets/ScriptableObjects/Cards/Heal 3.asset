@@ -17,4 +17,4 @@ MonoBehaviour:
     cardName: Heal
     effectColor: {r: 0.9843138, g: 0.6313726, b: 1, a: 1}
     targetEnemy: 0
-    healValue: 3
+    healValue: 6

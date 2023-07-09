@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: EnemyAttack 3
   m_EditorClassIdentifier: 
   stats:
+    cardSprite: {fileID: 0}
     cardName: Att
     effectColor: {r: 0.8584906, g: 0.17412782, b: 0.17412782, a: 1}
     targetEnemy: 1
-    attackValue: 7
+    attackValue: 4
