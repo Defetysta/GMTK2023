@@ -38,6 +38,12 @@ public class GameManager : MonoBehaviour
 	[SerializeField]
 	private TextMeshProUGUI healIntent;
 
+	[SerializeField]
+	private GameOverHandler gameOverView;
+
+	[SerializeField]
+	private SimpleAudioEvent gameOverSound;
+
 	public Button startTurnButton;
 
 	private int enemyMoveCounter = 0;
@@ -100,6 +106,12 @@ public class GameManager : MonoBehaviour
 		HandleEnemyMoves();
 		enemyStats.Display(enemyCombatControllerCopy.Stats);
 		playerStats.Display(playerCombatControllerCopy);
+
+		if (playerCombatControllerCopy.HP.Value <= 0)
+		{
+			gameOverView.gameObject.SetActive(true);
+			// gameOverSound.Play();
+		}
 	}
 
 	private void DisplayEnemyIntents(Moveset.MovesGroup[] enemyMoves)

@@ -103,6 +103,12 @@ public class Card : MonoBehaviour
 
 	public void Detach()
 	{
+#if !UNITY_EDITOR
+		if(holderCardSlot == null)
+		{
+			return;
+		}
+#endif
 		holderCardSlot.AttachedCard = null;
 		holderCardSlot = null;
 	}
