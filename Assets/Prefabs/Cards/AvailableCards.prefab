@@ -71,10 +71,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6581389771651725805}
     m_Modifications:
-    - target: {fileID: 2364117216660539220, guid: f7727ffd68b96b546907fb7b425f3534, type: 3}
-      propertyPath: AvailableCardsContainer
-      value: 
-      objectReference: {fileID: 6581389771651725805}
     - target: {fileID: 2364117216660539221, guid: f7727ffd68b96b546907fb7b425f3534, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -117,7 +113,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2364117216660539222, guid: f7727ffd68b96b546907fb7b425f3534, type: 3}
       propertyPath: m_Name
-      value: Card
+      value: TemplateCard
       objectReference: {fileID: 0}
     - target: {fileID: 2364117216660539222, guid: f7727ffd68b96b546907fb7b425f3534, type: 3}
       propertyPath: m_IsActive

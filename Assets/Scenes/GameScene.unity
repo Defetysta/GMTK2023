@@ -2258,12 +2258,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 3.835083
       objectReference: {fileID: 0}
-    - target: {fileID: 2371391516876777197, guid: 036f202e0107d7c46919762895877e0d,
-        type: 3}
-      propertyPath: moveCard
-      value: 
-      objectReference: {fileID: 11400000, guid: 8ad75899de1fe3e47a2f43300acbed97,
-        type: 2}
     - target: {fileID: 2826964194126126204, guid: 036f202e0107d7c46919762895877e0d,
         type: 3}
       propertyPath: m_AnchorMax.y
